@@ -1,6 +1,6 @@
 
 # Импортируем из приложения django.contrib.auth нужный view-класс
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.urls import path
 from . import views
 
@@ -21,5 +21,15 @@ urlpatterns = [
     # Полный адрес страницы регистрации - auth/signup/,
     # но префикс auth/ обрабатывется в головном urls.py
     path('signup/', views.SignUp.as_view(), name='signup'),
-
+    path(
+        'login/',
+        LoginView.as_view(template_name='users/login.html'),
+        name='login'
+    ),
+    path(
+        'password_change/',
+        PasswordChangeView.as_view(
+            template_name='users/password_change_form.html'),
+        name='password_change'
+    ),
 ]

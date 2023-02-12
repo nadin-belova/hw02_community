@@ -21,6 +21,7 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     path('', include('posts.urls', namespace='posts')),
     path('admin/', admin.site.urls),
+    path('about/', include('about.urls', namespace='about')),
     # path('__debug__/', include('debug_toolbar.urls')),  # delete this.RGenius
 
 ]

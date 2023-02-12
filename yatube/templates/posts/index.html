@@ -6,22 +6,30 @@
 {% endblock title%} 
 
 {% block content %}
+
     <!-- класс py-5 создает отступы сверху и снизу блока -->
-    <div class="container py-5">     
+    
+    <div class="container py-5">    
+      {% include 'posts/includes/paginator.html' %}   
       <h1>Последние обновления на сайте {{ text }}</h1>
-      {% for post in posts %}
-        {% include 'includes/post_card.html' %}  
+      {% for post in page_obj %}
+      {% include 'includes/post_card.html' %}  
                   
-        {% if post.group %}   
-          <a href="{% url 'posts:group' post.group.slug %}">
-            Все записи группы "{{ post.group.title }}"</a>
-        {% endif %} 
-        
-        {% if not forloop.last %}
-          <hr>
+      {% if post.group %}   
+        <a href="{% url 'posts:group' post.group.slug %}">
+          Все записи группы "{{ post.group.title }}"</a>
+      {% endif %} 
+      
+      {% if not forloop.last %}
+        <hr>
         {% endif %}
       
       {% endfor %} 
-      <!-- под последним постом нет линии -->
-    </div>  
+    <!-- под последним постом нет линии -->
+      {% include 'posts/includes/paginator.html' %}  
+
+    </div>   
+      
 {% endblock %} 
+
+
