@@ -6,7 +6,7 @@
 
 {% block content %}
   <div class="container py-5">
-    {% include 'posts/includes/paginator.html' %}
+    
     <h1>{{ group.title }}</h1>
     <p> {{ group.description }}
     <article>
@@ -20,6 +20,6 @@
     {% endfor %} 
     <article>   
     <!-- под последним постом нет линии -->
-    {% include 'posts/includes/paginator.html' %}
+    
   </div>  
 {% endblock %} 

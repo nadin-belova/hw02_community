@@ -2,15 +2,15 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>{{ title }}</title>
-{% endblock title%} 
+  {% comment %} <title>{{ title }}</title> {% endcomment %}
+  <title>Последние обновления на сайте</title>
+{% endblock %} 
 
 {% block content %}
 
     <!-- класс py-5 создает отступы сверху и снизу блока -->
     
     <div class="container py-5">    
-      {% include 'posts/includes/paginator.html' %}   
       <h1>Последние обновления на сайте {{ text }}</h1>
       {% for post in page_obj %}
       {% include 'includes/post_card.html' %}  
@@ -26,7 +26,7 @@
       
       {% endfor %} 
     <!-- под последним постом нет линии -->
-      {% include 'posts/includes/paginator.html' %}  
+      {% comment %} {% include 'posts/includes/paginator.html' %}   {% endcomment %}
 
     </div>   
       

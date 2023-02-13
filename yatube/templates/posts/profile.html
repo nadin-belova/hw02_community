@@ -6,11 +6,12 @@
 {% block content %}
       <div class="container py-5">        
         <h1>Все посты пользователя {{ full_name.get_full_name }}</h1>
-        <h3>Всего постов: {{ post_count }}</h3>   
+        <h3>Всего постов:{{ post_count }}</h3>   
         <article>
           {% for post in page_obj %}
           {% include 'includes/post_card.html' %} 
-          <a href=" 111 ">все посты пользователя</a>
+          <a href=" 111 ">все посты пользователя</a> 
+           {% comment %} <a href="../posts/profile.html">все посты пользователя</a> {% endcomment %}
 
           <a href=" {% url 'posts:post_detail' post.id %} ">подробная информация </a>
 
