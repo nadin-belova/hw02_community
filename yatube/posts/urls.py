@@ -12,5 +12,14 @@ urlpatterns = [
     path('profile/<str:username>/', views.profile, name='profile'),
     # Просмотр записи
     path('posts/<int:post_id>/', views.post_detail, name='post_detail'),
-    # path('test', views.test),  # delete this. RGenius
+    # path(
+    #     'change-password/',
+    #     auth_views.PasswordChangeView.as_view(
+    #         template_name='commons/change-password.html',
+    #         success_url = '/'
+    #     ),
+    #     name='change_password'
+    # ),
+    path('create/', views.post_create, name='create_post'),
+    # path('posts/<int:post_id>/edit', views.post_edit, name='post_edit'),
 ]

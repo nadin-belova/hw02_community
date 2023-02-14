@@ -1,31 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+
+from posts.forms import PostForm
 from .models import Group, Post, User
 from django.core.paginator import Paginator
-
-# delete this. RGenius
-# def test(request):
-#     text = '-------------------------------------'
-#     # posts = Post.objects.filter(text__contains='Он')
-#     posts = Post.objects.get(id=10)
-#     # groups = Group.objects.all()
-
-#     context = {
-#         'text': text,
-#         'posts': posts,
-#         # 'groups': groups,
-#     }
-#     return render(request, 'posts/test.html', context)
-# delete this. RGenius
-
-
-# def index(request):
-#     posts = Post.objects.all()[:10]
-#     title = 'Последние обновления на сайте'
-#     context = {
-#         'title': title,
-#         'posts': posts,
-#     }
-#     return render(request, 'posts/index.html', context)
 
 
 def index(request):
@@ -46,19 +23,6 @@ def index(request):
         'page_obj': page_obj,
     }
     return render(request, 'posts/index.html', context)
-
-
-# def group_posts(request, slug):
-#     group = get_object_or_404(Group, slug=slug)
-#     title = f'Записи сообщества {group.title}'
-#     posts = Post.objects.all()
-#     # posts = Post.group(правильно или нет?)!!!!!
-#     context = {
-#         'title': title,
-#         'group': group,
-#         'posts': posts,
-#     }
-#     return render(request, 'posts/group_list.html', context)
 
 
 def group_posts(request, slug):
@@ -106,8 +70,6 @@ def profile(request, username):
 
     context = {
         'page_obj': page_obj,
-        # 'posts': posts,
-        # 'username': username,
         'full_name': full_name,
         'post_count': post_count
     }
@@ -117,6 +79,7 @@ def profile(request, username):
 def post_detail(request, post_id):
     # Здесь код запроса к модели и создание словаря контекста
     post = get_object_or_404(Post, pk=post_id)
+    
     posts = Post.objects.filter(author=post.author)
     post_count = posts.count()
     context = {
@@ -124,3 +87,20 @@ def post_detail(request, post_id):
         'post_count': post_count,
     }
     return render(request, 'posts/post_detail.html', context)
+
+
+def post_create(request):
+    # if request.method == 'Post':
+    #     form = PostForm(request.Post)
+    #     if form.is_valid():
+    #         post = form.save(commit = False)
+    #         post.author = request.user
+    #         post.save()
+    #         return redirect('posts:profile', request.user)
+    #     return render(request, 'posts/create_post.html', {'form': form}) 
+    # else:
+    #     form = PostForm()
+    #     return render(request, 'posts/post_create.html', {'form': form})
+
+    form = PostForm()
+    return render(request, 'posts/create_post.html', {'form': form})

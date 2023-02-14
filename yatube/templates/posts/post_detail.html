@@ -1,67 +1,51 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title> Пост {{ post.text|truncatechars:30 }}</title>
+  <title> {{ post.text|truncatechars:30 }}</title>
 {% endblock title%} 
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <!-- Подключены иконки, стили и заполенены мета теги -->
-    <title>Пост </title>
-  </head>
-  <body>
-    
-    <main>
-      <div class="row">
-        <aside class="col-12 col-md-3">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              Дата публикации: <!-- 31 июля 1854 --> {{ post.pub_date|date:"d E Y" }}
-            </li>
+  <div class="container py-5">
+    <div class="row">
+      <aside class="col-12 col-md-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Дата публикации: <!-- 31 июля 1854 --> {{ post.pub_date|date:"d E Y" }}
+          </li>
 
-            <!-- если у поста есть группа -->  
-            
-             <li class="list-group-item">
+          <!-- если у поста есть группа -->  
+          {% if post.group %}
+            <li class="list-group-item">
               Группа: <!-- Название группы -->{{ post.group.title }}
               <hr>
               <a href="{% url 'posts:group' post.group.slug %}">
-                все записи группы "{{ post.group.title }}"
-              </a>
-            </li> 
-            
-
-            {% comment %} {% if post.group %}   
-            <a href="{% url 'posts:group' post.group.slug %}">
-              Все записи группы "{{ post.group.title }}"</a>
-            {% endif %}  {% endcomment %}
-
-            <li class="list-group-item">
-              Автор: <!--Лев Толстой-->{{ post.author.get_full_name }}
-            </li>
-
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Всего постов автора:  <span > {{ post_count }}</span>
-            </li>
-
-            <li class="list-group-item">
-              <a href="<!-- -->">
-                все посты пользователя
+                Все записи группы "{{ post.group.title }}"
               </a>
             </li>
-          </ul>
-        </aside>
+          {% endif %}
         
-        <article class="col-12 col-md-9">
-          <p>
-          {{ post.text}}
-          </p>
-        </article>
-      </div> 
+          <li class="list-group-item">
+            Автор: <!--Лев Толстой-->{{ post.author.get_full_name }}  {{ user.username }}
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Всего постов автора:  <span > {{ post_count }}</span>
+          </li>
+
+          <li class="list-group-item">
+            
+            <a href="{% url 'posts:profile' post.author.username %}" > 
+              все посты пользователя 
+            </a>
+          </li>
+        </ul>
+      </aside>
       
-    </main>
-    
-  </body>
-</html> 
+      <article class="col-12 col-md-9">
+        <p>
+          {{ post.text}}
+        </p>
+      </article>
+    </div> 
+  </div> 
 {% endblock %}
